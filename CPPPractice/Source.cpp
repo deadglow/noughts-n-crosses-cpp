@@ -25,6 +25,7 @@ const char cRowCap[] = "+-----------+\n";
 const char cRowBreak[] = "|---+---+---|\n";
 const char cCharA = 'X';
 const char cCharB = 'O';
+const char cPlaceCharKey = 'l';
 
 int main()
 {
@@ -35,6 +36,7 @@ int main()
 		int iCurX = 1;
 		int iCurY = 1;
 		bool bPlayer1Turn = true;
+		//Used to end game after 9 turns
 		int iTurnCounter = 0;
 		char winner = 0;
 		
@@ -130,6 +132,14 @@ int main()
 				break;
 			}
 
+			//Print player turn message
+			if (bPlayer1Turn)
+				cout << "P1 turn" << endl;
+			else
+				cout << "P2 turn" << endl;
+
+			cout << "WASD to move cursor. " << cPlaceCharKey << " to place piece." << endl;
+
 			//Get input
 			char ch = _getch();
 
@@ -176,9 +186,9 @@ int main()
 		else
 			cout << "Tie!" << endl;
 
-		cout << "Any key to restart, Q to quit." << endl;
-
-		if (_getch() == 'q')
+		//Restart/quit prompt
+		cout << "Any input to restart, 'q' to quit." << endl;
+		if (getchar() == 'q')
 			break;
 	}
 	
