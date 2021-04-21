@@ -161,11 +161,8 @@ int main()
 				case 'l':
 					if (cGridState[iCurX][iCurY] == 0)
 					{
-						if (bPlayer1Turn)
-							cGridState[iCurX][iCurY] = cCharA;
-						else
-							cGridState[iCurX][iCurY] = cCharB;
-						
+						//Place char and increment turn
+						cGridState[iCurX][iCurY] = bPlayer1Turn ? cCharA : cCharB;						
 						bPlayer1Turn = !bPlayer1Turn;
 						iTurnCounter++;
 					}
