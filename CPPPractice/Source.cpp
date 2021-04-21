@@ -6,26 +6,19 @@ using namespace std;
 //Min and max methods for limiting the cursor
 int min(int a, int b)
 {
-	if (a < b)
-		return a;
-	else
-		return b;
+	return (a < b)? a : b;
 }
 
 int max(int a, int b)
 {
-	if (a > b)
-		return a;
-	else
-		return b;
+	return (a > b) ? a : b;
 }
 
-//Vars
-const char cRowCap[] = "+-----------+\n";
-const char cRowBreak[] = "|---+---+---|\n";
-const char cCharA = 'X';
-const char cCharB = 'O';
-const char cPlaceCharKey = 'l';
+#define CHAR_A 'X'
+#define CHAR_B 'O'
+#define PLACE_KEY 'l'
+#define ROW_CAP "+-----------+\n"
+#define ROW_BREAK "|---+---+---|\n"
 
 int main()
 {
@@ -49,7 +42,7 @@ int main()
 			//Initialise output string
 			char cOutput[100];
 			//Add top cap
-			strcpy_s(cOutput, 100, cRowCap);
+			strcpy_s(cOutput, 100, ROW_CAP);
 
 			int iRowOffset = 0;
 			for (int y = 0; y < 3; ++y)
@@ -75,7 +68,7 @@ int main()
 						cOutput[iRowOffset + 13] = '\n';
 						//Add row break
 						cOutput[iRowOffset + 14] = 0;
-						strcat_s(cOutput, 100, cRowBreak);
+						strcat_s(cOutput, 100, ROW_BREAK);
 					}
 
 					//Draw cursor if current x/y pos match cursor x/y pos
@@ -91,7 +84,7 @@ int main()
 				}
 			}
 			cOutput[84] = 0;
-			strcat_s(cOutput, 100, cRowCap);
+			strcat_s(cOutput, 100, ROW_CAP);
 			cOutput[99] = 0;
 
 			//DRAW!
@@ -138,7 +131,7 @@ int main()
 			else
 				cout << "P2 turn" << endl;
 
-			cout << "WASD to move cursor. " << cPlaceCharKey << " to place piece." << endl;
+			cout << "WASD to move cursor. " << PLACE_KEY << " to place piece." << endl;
 
 			//Get input
 			char ch = _getch();
@@ -162,7 +155,7 @@ int main()
 					if (cGridState[iCurX][iCurY] == 0)
 					{
 						//Place char and increment turn
-						cGridState[iCurX][iCurY] = bPlayer1Turn ? cCharA : cCharB;						
+						cGridState[iCurX][iCurY] = bPlayer1Turn ? CHAR_A : CHAR_B;						
 						bPlayer1Turn = !bPlayer1Turn;
 						iTurnCounter++;
 					}
@@ -176,16 +169,16 @@ int main()
 		}
 
 		//Print win messages
-		if (winner == cCharA)
+		if (winner == CHAR_A)
 			cout << "Player 1 wins!" << endl;
-		else if (winner == cCharB)
+		else if (winner == CHAR_B)
 			cout << "Player 2 wins!" << endl;
 		else
 			cout << "Tie!" << endl;
 
 		//Restart/quit prompt
 		cout << "Any input to restart, 'q' to quit." << endl;
-		if (getchar() == 'q')
+		if (_getch() == 'q')
 			break;
 	}
 	
